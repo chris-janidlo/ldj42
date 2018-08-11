@@ -39,11 +39,6 @@ public class Dash : AMove
 			actingPos + Vector2Int.left * 2,
 		};
 
-		return potentials.Where(v =>
-		{
-			var b = Board.Instance.Spaces[v];
-			return Board.Instance.PositionInRange(v) && !b.IsBroken && b.OccupyingPiece == null;
-		})
-			.Select(v => Board.Instance.Spaces[v]).ToList();
+		return potentials.Where(Board.Instance.PositionIsWalkable).Select(v => Board.Instance.Spaces[v]).ToList();
 	}
 }

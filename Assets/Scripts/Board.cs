@@ -52,11 +52,12 @@ public class Board : MonoBehaviour
 		}
 	}
 
-	public bool PositionInRange (Vector2Int pos)
+	public bool PositionIsWalkable (Vector2Int pos)
 	{
-		return
-			pos.x >= 0 && pos.x < Dimensions.x &&
+		bool inRange = pos.x >= 0 && pos.x < Dimensions.x &&
 			pos.y >= 0 && pos.y < Dimensions.y;
+		BoardSpace space = Spaces[pos];
+		return inRange && !space.IsBroken && space.OccupyingPiece == null;
 	}
 	
 	// TODO: move these to their respective classes
