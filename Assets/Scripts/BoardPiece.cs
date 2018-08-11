@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class BoardPiece : MonoBehaviour
 {
+	public Vector2Int StartingPosition;
 	public float Health;
 
 	public List<AMove> MovesFromRest;

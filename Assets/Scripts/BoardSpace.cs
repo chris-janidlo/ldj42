@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardSpace
+[SelectionBase]
+public class BoardSpace : MonoBehaviour
 {
+	public Vector2 Dimensions;
 	public BoardPiece OccupyingPiece;
 	public bool IsBroken;
 }
