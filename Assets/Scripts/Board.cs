@@ -17,6 +17,8 @@ public class Board : MonoBehaviour
 
 	public Turn Turn;// { get; private set; }
 
+	bool turningToPlayer = false;
+
 	// Dictionary<AIPiece, AMove> enemyMoves = new Dictionary<AIPiece, AMove>();
 
 	void Start ()
@@ -28,6 +30,23 @@ public class Board : MonoBehaviour
 
 		Spaces = new BiDictionary<Vector2Int, BoardSpace>();
 		initializeBoard();
+	}
+
+	void Update ()
+	{
+		;
+		if (Turn == Turn.AI && !turningToPlayer)
+		{
+			turningToPlayer = true;
+			StartCoroutine(changeTurnAfterSeconds(2));
+		}
+	}
+
+	IEnumerator changeTurnAfterSeconds (float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		Turn = Turn.Player;
+		turningToPlayer = false;
 	}
 	
 	#region Public Helper Methods

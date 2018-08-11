@@ -9,5 +9,5 @@ public class BoardPiece : MonoBehaviour
 	public float Health;
 
 	public List<AMove> MovesFromRest;
-	public AMove LastUsedMove;
+	public AMove LastUsedMove = null;
 }
