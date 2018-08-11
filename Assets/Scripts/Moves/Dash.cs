@@ -25,6 +25,8 @@ public class Dash : AMove
 
 		actingPieceSpace.OccupyingPiece = null;
 		space.OccupyingPiece = actingPiece;
+
+		actingPiece.transform.position = space.transform.position;
 	}
 
 	public override List<BoardSpace> GetLegalMoves(BoardPiece actingPiece, Board board)

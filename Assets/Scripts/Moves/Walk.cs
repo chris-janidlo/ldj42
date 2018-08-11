@@ -8,9 +8,13 @@ public class Walk : AMove
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{
 		BoardSpace actingPieceSpace = Board.Instance.GetSpaceContaining(actingPiece);
+
 		actingPieceSpace.IsBroken = true;
+
 		actingPieceSpace.OccupyingPiece = null;
 		space.OccupyingPiece = actingPiece;
+		
+		actingPiece.transform.position = space.transform.position;
 	}
 
 	public override List<BoardSpace> GetLegalMoves(BoardPiece actingPiece, Board board)
