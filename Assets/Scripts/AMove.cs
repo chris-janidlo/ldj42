@@ -9,5 +9,5 @@ public abstract class AMove : MonoBehaviour
 	public abstract List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board);
 
 	// assumes legality
-	public abstract void ApplyEffect (BoardPiece actingPiece, params BoardSpace[] spaces);
+	public abstract void ApplyEffect (BoardPiece actingPiece, BoardSpace space);
 }

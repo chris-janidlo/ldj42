@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Repair : AMove
 {
-	public override void ApplyEffect(BoardPiece actingPiece, params BoardSpace[] spaces)
+	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{
 		throw new System.NotImplementedException();
 	}
