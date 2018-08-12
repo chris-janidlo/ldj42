@@ -15,11 +15,9 @@ public class Board : MonoBehaviour
 	public BoardPiece Player;
 	public List<AIPiece> Enemies;
 
-	public Turn Turn;// { get; private set; }
+	public Turn Turn;
 
 	bool turningToPlayer = false;
-
-	// Dictionary<AIPiece, AMove> enemyMoves = new Dictionary<AIPiece, AMove>();
 
 	void Start ()
 	{
@@ -34,11 +32,10 @@ public class Board : MonoBehaviour
 
 	void Update ()
 	{
-		;
 		if (Turn == Turn.AI && !turningToPlayer)
 		{
 			turningToPlayer = true;
-			StartCoroutine(changeTurnAfterSeconds(2));
+			StartCoroutine(changeTurnAfterSeconds(.5f));
 		}
 	}
 
@@ -80,8 +77,10 @@ public class Board : MonoBehaviour
 	{
 		bool inRange = pos.x >= 0 && pos.x < Dimensions.x &&
 			pos.y >= 0 && pos.y < Dimensions.y;
+		if (!inRange) return false;
+
 		BoardSpace space = Spaces[pos];
-		return inRange && !space.IsBroken && space.OccupyingPiece == null;
+		return !space.IsBroken && space.OccupyingPiece == null;
 	}
 	#endregion
 
@@ -109,27 +108,7 @@ public class Board : MonoBehaviour
 			enemy.transform.position = Spaces[enemy.StartingPosition].transform.position;
 		}
 	}
-	
-	// TODO: move these to their respective classes
-	// public void SelectPlayerMove (AMove move, params BoardSpace[] spaces)
-	// {
-	// 	move.ApplyEffect(Player, spaces);
-	// 	Turn = Turn.AI;
-	// }
 
-	// public void SelectAIMove (AMove move, AIPiece piece, params BoardSpace[] spaces)
-	// {
-	// 	enemyMoves.Add(piece, move);
-	// 	if (enemyMoves.Count == Enemies.Count)
-	// 	{
-	// 		foreach (var kvpair in enemyMoves)
-	// 		{
-	// 			kvpair.Value.ApplyEffect(kvpair.Key, spaces);
-	// 		}
-	// 		enemyMoves.Clear();
-	// 		Turn = Turn.Player;
-	// 	}
-	// }
 }
 
 public enum Turn

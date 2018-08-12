@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dash : AMove
+public class Dash : APlayerMove
 {
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{
+		base.ApplyEffect(actingPiece, space);
 		BoardSpace actingPieceSpace = Board.Instance.GetSpaceContaining(actingPiece);
 		Vector2Int midpoint = (Board.Instance.Spaces.Reverse[actingPieceSpace] + Board.Instance.Spaces.Reverse[space]).DivideBy(2);
 

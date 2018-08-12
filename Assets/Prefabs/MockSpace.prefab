@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4615194842143756}
   - component: {fileID: 33016888728730232}
   - component: {fileID: 23490312979187030}
-  - component: {fileID: 65338797171494756}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -38,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4815844033119396}
   - component: {fileID: 114520523589906622}
+  - component: {fileID: 65535676984558022}
   m_Layer: 0
   m_Name: MockSpace
   m_TagString: Untagged
@@ -114,12 +114,12 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008655079384622}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65338797171494756
+--- !u!65 &65535676984558022
 BoxCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1008655079384622}
+  m_GameObject: {fileID: 1460935085453854}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -137,6 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f037005359246430e8c95445675d5388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NormalColor: {r: 0.61960787, g: 0.7607843, b: 0.9098039, a: 1}
+  HighlightedColor: {r: 0.4627451, g: 0.39215687, b: 0.99607843, a: 1}
+  PressedColor: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
+  DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+  BrokenColor: {r: 0.5137255, g: 0.19215687, b: 0.16078432, a: 1}
   Dimensions: {x: 1.2, y: 1.2}
   OccupyingPiece: {fileID: 0}
-  IsBroken: 0

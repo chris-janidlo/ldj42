@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,4 +11,9 @@ public class BoardPiece : MonoBehaviour
 
 	public List<AMove> MovesFromRest;
 	public AMove LastUsedMove = null;
+
+	public List<AMove> GetAllMoves ()
+	{
+		return MovesFromRest.SelectMany(m => m.Traverse()).Distinct().ToList();
+	}
 }

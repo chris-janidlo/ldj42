@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Walk : AMove
+public class Walk : APlayerMove
 {
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{
+		base.ApplyEffect(actingPiece, space);
 		BoardSpace actingPieceSpace = Board.Instance.GetSpaceContaining(actingPiece);
 
 		actingPieceSpace.IsBroken = true;
 
 		actingPieceSpace.OccupyingPiece = null;
 		space.OccupyingPiece = actingPiece;
-		
+
 		actingPiece.transform.position = space.transform.position;
 	}
 

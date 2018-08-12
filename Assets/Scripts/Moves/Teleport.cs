@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Teleport : AMove
+public class Teleport : APlayerMove
 {
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{

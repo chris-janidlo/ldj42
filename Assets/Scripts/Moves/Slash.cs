@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slash : AMove
+public class Slash : APlayerMove
 {
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{

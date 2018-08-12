@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Repair : AMove
+public class Repair : APlayerMove
 {
 	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
 	{
