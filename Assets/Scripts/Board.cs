@@ -209,7 +209,7 @@ public class Board : MonoBehaviour
 				Vector2 scaledPos = boardPos * SpacePrefab.Dimensions;
 				Vector3 spawnPos = new Vector3(scaledPos.x, 0, scaledPos.y);
 
-				Spaces[boardPos] = Instantiate(SpacePrefab, spawnPos, Quaternion.identity);
+				Spaces[boardPos] = Instantiate(SpacePrefab, spawnPos, Quaternion.Euler(0, 90, 0));
 				Spaces[boardPos].transform.parent = transform;
 			}
 		}

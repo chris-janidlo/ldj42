@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
 	void Start ()
 	{
+		setMenu(true);
 		ContinueButton.onClick.AddListener(continueButtonDelegate);
 		setMenu(false);	
 	}
