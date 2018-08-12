@@ -78,10 +78,6 @@ public class Board : MonoBehaviour
 			float chance = EnemySpawnRate.Evaluate(Enemies.Count);
 			if (Random.value < chance)
 			{
-				var enemy = Instantiate(EnemyPrefab);
-				enemy.transform.parent = transform.Find("Enemies");
-				Enemies.Add(enemy);
-
 				var playerPos = (Vector2Int) GetPositionOf(Player);
 				var spawnSpaces = Spaces.Keys
 					.Where(v => SpaceIsWalkable(Spaces[v]))
@@ -95,8 +91,7 @@ public class Board : MonoBehaviour
 					)
 					.ToList();
 
-				enemy.StartingPosition = spawnSpaces[Random.Range(0, spawnSpaces.Count)];
-				SpawnPiece(enemy);
+				SpawnEnemy(spawnSpaces[Random.Range(0, spawnSpaces.Count)]);
 			}
 
 			Turn = Turn.Player;
@@ -156,8 +151,20 @@ public class Board : MonoBehaviour
 	{
 		var space = Spaces[piece.StartingPosition];
 		space.OccupyingPiece = piece;
+		
 		piece.DesiredPosition = space.transform.position;
 		piece.transform.position = space.transform.position;
+	}
+
+	public void SpawnEnemy (Vector2Int pos)
+	{
+		var enemy = Instantiate(EnemyPrefab);
+
+		enemy.transform.parent = transform.Find("Enemies");
+		enemy.StartingPosition = pos;
+
+		Enemies.Add(enemy);
+		SpawnPiece(enemy);
 	}
 
 	public IEnumerable<Vector2Int> GetPlusShapePositionsAroundPiece (BoardPiece piece, int radius = 1)
