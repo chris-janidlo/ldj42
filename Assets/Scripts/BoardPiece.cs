@@ -7,7 +7,10 @@ using UnityEngine.UI;
 [SelectionBase]
 public class BoardPiece : MonoBehaviour
 {
+	public const float SpaceMoveTime = .2f;
+
 	public Vector2Int StartingPosition;
+	public Vector3 DesiredPosition;
 
 	public List<AMove> MovesFromRest;
 	public AMove LastUsedMove = null;
@@ -40,9 +43,16 @@ public class BoardPiece : MonoBehaviour
 		}
 	}
 
+	Vector3 currentSpaceMoveSpeed = Vector3.zero;
+
 	protected virtual void Start ()
 	{
 		Health = MaxHealth;
+	}
+
+	protected virtual void Update ()
+	{
+		transform.position = Vector3.SmoothDamp(transform.position, DesiredPosition, ref currentSpaceMoveSpeed, SpaceMoveTime);
 	}
 
 	public List<AMove> GetAllMoves ()

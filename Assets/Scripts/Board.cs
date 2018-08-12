@@ -83,8 +83,8 @@ public class Board : MonoBehaviour
 				Enemies.Add(enemy);
 
 				var playerPos = (Vector2Int) GetPositionOf(Player);
-				var spawnSpaces = Spaces.Values
-					.Where(SpaceIsWalkable)
+				var spawnSpaces = Spaces.Keys
+					.Where(v => SpaceIsWalkable(Spaces[v]))
 					.Except(new Vector2Int[] {
 						playerPos + Vector2Int.up,
 						playerPos + Vector2Int.right,
@@ -92,11 +92,11 @@ public class Board : MonoBehaviour
 						playerPos + Vector2Int.left,
 					}
 						.Where(PositionInRange)
-						.Select(v => Spaces[v])
 					)
 					.ToList();
-				
-				MovePieceToSpace(enemy, spawnSpaces[Random.Range(0, spawnSpaces.Count)], false);
+
+				enemy.StartingPosition = spawnSpaces[Random.Range(0, spawnSpaces.Count)];
+				SpawnPiece(enemy);
 			}
 
 			Turn = Turn.Player;
@@ -141,17 +141,22 @@ public class Board : MonoBehaviour
 			pos.y >= 0 && pos.y < Dimensions.y;
 	}
 
-	public void MovePieceToSpace (BoardPiece piece, BoardSpace space, bool breakPrevious = true)
+	public void MovePieceToSpace (BoardPiece piece, BoardSpace space)
 	{
 		BoardSpace currentSpace = GetSpaceContaining(piece);
 
-		if (currentSpace != null)
-		{
-			if (breakPrevious) currentSpace.IsBroken = true;
-			currentSpace.OccupyingPiece = null;
-		}
+		currentSpace.IsBroken = true;
+		currentSpace.OccupyingPiece = null;
 
 		space.OccupyingPiece = piece;
+		piece.DesiredPosition = space.transform.position;
+	}
+
+	public void SpawnPiece (BoardPiece piece)
+	{
+		var space = Spaces[piece.StartingPosition];
+		space.OccupyingPiece = piece;
+		piece.DesiredPosition = space.transform.position;
 		piece.transform.position = space.transform.position;
 	}
 
@@ -185,13 +190,11 @@ public class Board : MonoBehaviour
 			}
 		}
 
-		Spaces[Player.StartingPosition].OccupyingPiece = Player;
-		Player.transform.position = Spaces[Player.StartingPosition].transform.position;
+		SpawnPiece(Player);
 
 		foreach (var enemy in Enemies)
 		{
-			Spaces[enemy.StartingPosition].OccupyingPiece = enemy;
-			enemy.transform.position = Spaces[enemy.StartingPosition].transform.position;
+			SpawnPiece(enemy);
 		}
 	}
 
