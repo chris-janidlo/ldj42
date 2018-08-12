@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
-	public BoardPiece Player;
+	public PlayerPiece Player;
 
 	Button passButton;
 	Button[] moveButtons;
@@ -27,6 +27,8 @@ public class PlayerInput : MonoBehaviour
 
 	void Update ()
 	{
+		if (Player == null) throw new System.Exception("Player cannot be null");
+
 		if (Board.Instance.Turn == stateImpliedByInput) return;
 
 		if (Board.Instance.Turn == Turn.Player)

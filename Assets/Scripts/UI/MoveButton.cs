@@ -8,7 +8,7 @@ public class MoveButton : MonoBehaviour
 {
 	static event System.EventHandler anyButtonHasBeenSelectedHandler;
 
-	public BoardPiece Player;
+	public PlayerPiece Player;
 	public AMove Move;
 
 	[Tooltip("Color when in selected state - when button has been pressed but the move hasn't yet been confirmed with a click on an applicable BoardSpace.")]
@@ -48,7 +48,7 @@ public class MoveButton : MonoBehaviour
 	Color oldColor;
 	List<BoardSpace> applicableSpaces; // only non-null when selected
 
-	public void Start ()
+	void Start ()
 	{
 		image = GetComponent<Image>();
 		button = GetComponent<Button>();
@@ -57,6 +57,11 @@ public class MoveButton : MonoBehaviour
 		button.onClick.AddListener(OnButtonClick);
 
 		anyButtonHasBeenSelectedHandler += onAnyButtonHasBeenSelected;
+	}
+
+	void Update ()
+	{
+		if (Player == null) throw new System.Exception("Player cannot be null");
 	}
 
 	void OnButtonClick ()

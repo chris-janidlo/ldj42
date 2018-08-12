@@ -12,7 +12,7 @@ public class Board : MonoBehaviour
 	public BoardSpace SpacePrefab;
 	public BiDictionary<Vector2Int, BoardSpace> Spaces;
 	
-	public BoardPiece Player;
+	public PlayerPiece Player;
 	[Tooltip("The enemies currently on the board. Also can be set in the editor with (already instantiated) enemies to re-position at the start of the game")]
 	public List<AIPiece> Enemies;
 
@@ -53,6 +53,8 @@ public class Board : MonoBehaviour
 
 	void Update ()
 	{
+		if (Player == null) throw new System.Exception("Player cannot be null");
+
 		if (Turn == Turn.AI)
 		{
 			foreach (var enemy in Enemies)

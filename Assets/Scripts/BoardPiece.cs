@@ -40,7 +40,7 @@ public class BoardPiece : MonoBehaviour
 		}
 	}
 
-	public virtual void Start ()
+	protected virtual void Start ()
 	{
 		Health = MaxHealth;
 	}
