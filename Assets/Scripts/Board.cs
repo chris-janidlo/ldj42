@@ -17,9 +17,7 @@ public class Board : MonoBehaviour
 
 	public Turn Turn;
 
-	bool turningToPlayer = false;
-
-	void Start ()
+	void Awake ()
 	{
 		if (Instance != null)
 			throw new System.Exception("There can only be one Board per scene");
@@ -30,20 +28,46 @@ public class Board : MonoBehaviour
 		initializeBoard();
 	}
 
-	void Update ()
+	// sorts Vector2Ints so that vectors closer to the given center are sorted first
+	// not 100% accurate but that makes things fun anyway
+	class Vector2IntComparerClosestToGiven : IComparer<Vector2Int>
 	{
-		if (Turn == Turn.AI && !turningToPlayer)
+		Vector2Int center;
+
+		public Vector2IntComparerClosestToGiven (Vector2Int center)
 		{
-			turningToPlayer = true;
-			StartCoroutine(changeTurnAfterSeconds(.5f));
+			this.center = center;
+		}
+
+		public int Compare(Vector2Int x, Vector2Int y)
+		{
+			return (int) (Vector2Int.Distance(x, center) - Vector2Int.Distance(y, center));
 		}
 	}
 
-	IEnumerator changeTurnAfterSeconds (float seconds)
+	void Update ()
 	{
-		yield return new WaitForSeconds(seconds);
-		Turn = Turn.Player;
-		turningToPlayer = false;
+		if (Turn == Turn.AI)
+		{
+			foreach (var enemy in Enemies)
+			{
+				BoardSpace closestSpace = GetPlusShapePositionsAroundPiece(enemy)
+					.OrderBy(v => v, new Vector2IntComparerClosestToGiven((Vector2Int) GetPositionOf(Player)))
+					.Select(v => Spaces[v])
+					.Where(s => s.OccupyingPiece == null || s.OccupyingPiece == Player)
+					.First();
+
+				if (closestSpace.OccupyingPiece == Player)
+				{
+					Player.Health -= enemy.Damage;
+				}
+				else
+				{
+					MovePieceToSpace(enemy, closestSpace);
+				}
+			}
+			Turn = Turn.Player;
+		}
 	}
 	
 	#region Public Helper Methods
@@ -82,6 +106,32 @@ public class Board : MonoBehaviour
 	{
 		return pos.x >= 0 && pos.x < Dimensions.x &&
 			pos.y >= 0 && pos.y < Dimensions.y;
+	}
+
+	public void MovePieceToSpace (BoardPiece piece, BoardSpace space)
+	{
+		BoardSpace currentSpace = GetSpaceContaining(piece);
+
+		currentSpace.IsBroken = true;
+
+		currentSpace.OccupyingPiece = null;
+		space.OccupyingPiece = piece;
+
+		piece.transform.position = space.transform.position;
+	}
+
+	public IEnumerable<Vector2Int> GetPlusShapePositionsAroundPiece (BoardPiece piece, int radius = 1)
+	{
+		Vector2Int center = (Vector2Int) GetPositionOf(piece);
+
+		return new Vector2Int[]
+		{
+			center + Vector2Int.up * radius,
+			center + Vector2Int.right * radius,
+			center + Vector2Int.down * radius,
+			center + Vector2Int.left * radius,
+		}
+			.Where(PositionInRange);
 	}
 	#endregion
 

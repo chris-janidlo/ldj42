@@ -26,7 +26,7 @@ public class MoveButton : MonoBehaviour
 
 			if (value)
 			{
-				applicableSpaces = Move.GetLegalMoves(Player, Board.Instance);
+				applicableSpaces = Move.GetLegalMoves(Player);
 				anyButtonHasBeenSelectedHandler(this, null);
 			}
 

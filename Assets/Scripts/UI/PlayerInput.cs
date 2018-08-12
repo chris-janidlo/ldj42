@@ -20,6 +20,9 @@ public class PlayerInput : MonoBehaviour
 		moveButtonsObject = transform.Find("MoveGraph").Find("Moves");
 		moveButtons = moveButtonsObject.GetComponentsInChildren<Button>();
 		passButton = transform.Find("PassButton").GetComponent<Button>();
+
+		stateImpliedByInput = Board.Instance.Turn == Turn.Player ? Turn.AI : Turn.Player;
+		disableAll();
 	}
 
 	void Update ()
@@ -39,12 +42,17 @@ public class PlayerInput : MonoBehaviour
 		}
 		else
 		{
-			foreach (Button button in moveButtons)
-			{
-				button.interactable = false;
-			}
-			passButton.interactable = false;
-			stateImpliedByInput = Turn.AI;
+			disableAll();
 		}
+	}
+
+	void disableAll ()
+	{
+		foreach (Button button in moveButtons)
+		{
+			button.interactable = false;
+		}
+		passButton.interactable = false;
+		stateImpliedByInput = Turn.AI;
 	}
 }

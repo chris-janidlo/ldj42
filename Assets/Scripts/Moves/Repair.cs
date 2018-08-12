@@ -11,9 +11,9 @@ public class Repair : APlayerMove
 		space.IsBroken = false;
 	}
 
-	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece)
 	{
-		return getPlusShapePositions(actingPiece)
+		return Board.Instance.GetPlusShapePositionsAroundPiece(actingPiece)
 			.Select(v => Board.Instance.Spaces[v])
 			.Where(s => s.IsBroken)
 			.ToList();

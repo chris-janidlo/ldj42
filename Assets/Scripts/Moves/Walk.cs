@@ -8,12 +8,12 @@ public class Walk : APlayerMove
 	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
 		base.ApplyEffect(actingPiece, space);
-		movementEffect(actingPiece, space);
+		Board.Instance.MovePieceToSpace(actingPiece, space);
 	}
 
-	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece)
 	{
-		return getPlusShapePositions(actingPiece)
+		return Board.Instance.GetPlusShapePositionsAroundPiece(actingPiece)
 			.Select(v => Board.Instance.Spaces[v])
 			.Where(Board.Instance.SpaceIsWalkable)
 			.ToList();

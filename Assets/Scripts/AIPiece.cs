@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class AIPiece : BoardPiece
 {
-	public AMove DecideMove (Board board)
-	{
-		throw new System.NotImplementedException();
+	public float Damage;
+	
+	protected override void die () {
+		Board.Instance.Enemies.Remove(this);
+		Destroy(gameObject);
 	}
 }

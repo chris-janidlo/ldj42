@@ -8,10 +8,10 @@ public class Teleport : APlayerMove
 	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
 		base.ApplyEffect(actingPiece, space);
-		movementEffect(actingPiece, space);
+		Board.Instance.MovePieceToSpace(actingPiece, space);
 	}
 
-	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece)
 	{
 		return Board.Instance.Spaces.Values.Where(Board.Instance.SpaceIsWalkable).ToList();
 	}

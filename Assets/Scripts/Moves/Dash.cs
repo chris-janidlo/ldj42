@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Dash : APlayerMove
 {
+	public float Damage;
+
 	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
 		base.ApplyEffect(actingPiece, space);
@@ -15,19 +17,19 @@ public class Dash : APlayerMove
 
 		if (middleSpace.OccupyingPiece != null)
 		{
-			// middleSpace.OccupyingPiece.)KILL
+			middleSpace.OccupyingPiece.Health -= Damage;
 		}
 		else
 		{
 			middleSpace.IsBroken = false;
 		}
 
-		movementEffect(actingPiece, space);
+		Board.Instance.MovePieceToSpace(actingPiece, space);
 	}
 
-	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece)
 	{
-		return getPlusShapePositions(actingPiece, 2)
+		return Board.Instance.GetPlusShapePositionsAroundPiece(actingPiece, 2)
 			.Select(v => Board.Instance.Spaces[v])
 			.Where(Board.Instance.SpaceIsWalkable)
 			.ToList();

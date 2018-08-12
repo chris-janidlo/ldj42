@@ -5,18 +5,20 @@ using UnityEngine;
 
 public class Slash : APlayerMove
 {
+	public float Damage;
+
 	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
 		base.ApplyEffect(actingPiece, space);
 		if (space.OccupyingPiece != null)
 		{
-			// middleSpace.OccupyingPiece.)KILL
+			space.OccupyingPiece.Health -= Damage;
 		}
 	}
 
-	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece)
 	{
-		return getPlusShapePositions(actingPiece)
+		return Board.Instance.GetPlusShapePositionsAroundPiece(actingPiece)
 			.Select(v => Board.Instance.Spaces[v])
 			.ToList();
 	}
