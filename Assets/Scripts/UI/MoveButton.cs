@@ -22,7 +22,7 @@ public class MoveButton : MonoBehaviour
 		{
 			_selected = value;
 
-			image.color = value ? SelectedColor : oldColor;
+			buttonGraphic.color = value ? SelectedColor : oldColor;
 
 			if (value)
 			{
@@ -43,17 +43,17 @@ public class MoveButton : MonoBehaviour
 		}
 	}
 
-	Image image;
+	Graphic buttonGraphic;
 	Button button;
 	Color oldColor;
 	List<BoardSpace> applicableSpaces; // only non-null when selected
 
 	void Start ()
 	{
-		image = GetComponent<Image>();
+		buttonGraphic = GetComponent<Graphic>();
 		button = GetComponent<Button>();
 
-		oldColor = image.color;
+		oldColor = buttonGraphic.color;
 		button.onClick.AddListener(OnButtonClick);
 
 		anyButtonHasBeenSelectedHandler += onAnyButtonHasBeenSelected;
