@@ -17,9 +17,9 @@ public class PauseMenu : MonoBehaviour
 
 	void Update ()
 	{
-		if (!active && Input.GetButton("Cancel"))
+		if (Input.GetButtonDown("Cancel"))
 		{
-			setMenu(true);
+			setMenu(!active);
 		}
 	}
 
@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
 
 	void setMenu (bool value)
 	{
+		active = value;
 		foreach (Transform child in transform)
 		{
 			child.gameObject.SetActive(value);
