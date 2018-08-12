@@ -37,7 +37,14 @@ public class BoardSpace : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 		}
 		set
 		{
-			setColor(value ? DisabledColor : NormalColor);
+			Color color;
+			if (!value)
+				color = NormalColor;
+			else if (IsBroken)
+				color = BrokenColor;
+			else
+				color = DisabledColor;
+			setColor(color);
 			_disabled = value;
 		}
 	}

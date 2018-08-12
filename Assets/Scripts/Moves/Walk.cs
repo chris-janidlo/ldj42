@@ -5,31 +5,17 @@ using UnityEngine;
 
 public class Walk : APlayerMove
 {
-	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
+	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
 		base.ApplyEffect(actingPiece, space);
-		BoardSpace actingPieceSpace = Board.Instance.GetSpaceContaining(actingPiece);
-
-		actingPieceSpace.IsBroken = true;
-
-		actingPieceSpace.OccupyingPiece = null;
-		space.OccupyingPiece = actingPiece;
-
-		actingPiece.transform.position = space.transform.position;
+		movementEffect(actingPiece, space);
 	}
 
-	public override List<BoardSpace> GetLegalMoves(BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
 	{
-		Vector2Int actingPos = (Vector2Int) Board.Instance.GetPositionOf(actingPiece);
-
-		Vector2Int[] potentials =
-		{
-			actingPos + Vector2Int.up,
-			actingPos + Vector2Int.right,
-			actingPos + Vector2Int.down,
-			actingPos + Vector2Int.left,
-		};
-
-		return potentials.Where(Board.Instance.PositionIsWalkable).Select(v => Board.Instance.Spaces[v]).ToList();
+		return getPlusShapePositions(actingPiece)
+			.Select(v => Board.Instance.Spaces[v])
+			.Where(Board.Instance.SpaceIsWalkable)
+			.ToList();
 	}
 }

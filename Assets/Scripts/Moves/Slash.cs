@@ -1,16 +1,23 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Slash : APlayerMove
 {
-	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
+	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
-		throw new System.NotImplementedException();
+		base.ApplyEffect(actingPiece, space);
+		if (space.OccupyingPiece != null)
+		{
+			// middleSpace.OccupyingPiece.)KILL
+		}
 	}
 
-	public override List<BoardSpace> GetLegalMoves(BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
 	{
-		throw new System.NotImplementedException();
+		return getPlusShapePositions(actingPiece)
+			.Select(v => Board.Instance.Spaces[v])
+			.ToList();
 	}
 }

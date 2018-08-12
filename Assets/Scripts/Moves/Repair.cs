@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Repair : APlayerMove
 {
-	public override void ApplyEffect(BoardPiece actingPiece, BoardSpace space)
+	public override void ApplyEffect (BoardPiece actingPiece, BoardSpace space)
 	{
-		throw new System.NotImplementedException();
+		base.ApplyEffect(actingPiece, space);
+		space.IsBroken = false;
 	}
 
-	public override List<BoardSpace> GetLegalMoves(BoardPiece actingPiece, Board board)
+	public override List<BoardSpace> GetLegalMoves (BoardPiece actingPiece, Board board)
 	{
-		throw new System.NotImplementedException();
+		return getPlusShapePositions(actingPiece)
+			.Select(v => Board.Instance.Spaces[v])
+			.Where(s => s.IsBroken)
+			.ToList();
 	}
 }
