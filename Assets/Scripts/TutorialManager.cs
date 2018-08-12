@@ -31,7 +31,7 @@ public class TutorialManager : MonoBehaviour
 
 		if (messageUp && Input.GetMouseButton(0))
 		{
-			if (index > Messages.Length)
+			if (index == Messages.Length)
 			{
 				SceneManager.LoadScene("Menu");
 			}

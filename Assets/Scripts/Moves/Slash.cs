@@ -20,6 +20,7 @@ public class Slash : APlayerMove
 	{
 		return Board.Instance.GetPlusShapePositionsAroundPiece(actingPiece)
 			.Select(v => Board.Instance.Spaces[v])
+			.Where(s => s.OccupyingPiece != null)
 			.ToList();
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -22,6 +23,9 @@ public class Board : MonoBehaviour
 	public AnimationCurve EnemySpawnRate;
 
 	public Turn Turn;
+
+	public Text ScoreIndicator;
+	int score;
 
 	bool calculatingAI;
 
@@ -107,6 +111,8 @@ public class Board : MonoBehaviour
 
 		calculatingAI = false;
 		Turn = Turn.Player;
+
+		ScoreIndicator.text = "Score: " + (++score);
 	}
 	
 	#region Public Helper Methods

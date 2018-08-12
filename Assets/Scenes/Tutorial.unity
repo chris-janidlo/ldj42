@@ -1101,10 +1101,11 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'The white piece in the center is your token. You control it by using the
-    actions on the top right: Dash, Slash, Repair, Teleport, and Walk. In order to
-    use an action, click on the word and then click on the board space you want to
-    use it on. If an action is greyed out, you can''t use it this turn.
+    actions on the top right: Dash, Slash, Repair, Teleport, and Walk.
 
+    In order to use an action, first click on the word, and then click on the board
+    space you want to use it on. If an action is greyed out, you can''t use it this
+    turn.
 
     The manual below tells you what each action does. Go ahead and try one now.
 
