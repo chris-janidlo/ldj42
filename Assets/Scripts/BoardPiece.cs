@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [SelectionBase]
 public class BoardPiece : MonoBehaviour
@@ -10,6 +11,9 @@ public class BoardPiece : MonoBehaviour
 
 	public List<AMove> MovesFromRest;
 	public AMove LastUsedMove = null;
+
+	public RectTransform HealthIndicator;
+	public LayoutGroup HealthIndicatorParent;
 
 	public float MaxHealth;
 
@@ -20,6 +24,17 @@ public class BoardPiece : MonoBehaviour
 		get { return _health_debug_view; }
 		set {
 			_health_debug_view = value;
+
+			foreach (Transform child in HealthIndicatorParent.transform)
+			{
+				Destroy(child.gameObject);
+			}
+			for (int i = 0; i < _health_debug_view; i++)
+			{
+				var h = Instantiate(HealthIndicator);
+				h.SetParent(HealthIndicatorParent.transform, false);
+			}
+
 			if (_health_debug_view <= 0)
 				die();
 		}
