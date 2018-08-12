@@ -13,7 +13,13 @@ public class Board : MonoBehaviour
 	public BiDictionary<Vector2Int, BoardSpace> Spaces;
 	
 	public BoardPiece Player;
+	[Tooltip("The enemies currently on the board. Also can be set in the editor with (already instantiated) enemies to re-position at the start of the game")]
 	public List<AIPiece> Enemies;
+
+	public AIPiece EnemyPrefab;
+
+	[Tooltip("At every turn, the chance to spawn an additional enemy is the value of this curve at time = (number of enemies currently alive).")]
+	public AnimationCurve EnemySpawnRate;
 
 	public Turn Turn;
 
@@ -66,6 +72,31 @@ public class Board : MonoBehaviour
 					MovePieceToSpace(enemy, closestSpace);
 				}
 			}
+
+			float chance = EnemySpawnRate.Evaluate(Enemies.Count);
+			if (Random.value < chance)
+			{
+				var enemy = Instantiate(EnemyPrefab);
+				enemy.transform.parent = transform.Find("Enemies");
+				Enemies.Add(enemy);
+
+				var playerPos = (Vector2Int) GetPositionOf(Player);
+				var spawnSpaces = Spaces.Values
+					.Where(SpaceIsWalkable)
+					.Except(new Vector2Int[] {
+						playerPos + Vector2Int.up,
+						playerPos + Vector2Int.right,
+						playerPos + Vector2Int.down,
+						playerPos + Vector2Int.left,
+					}
+						.Where(PositionInRange)
+						.Select(v => Spaces[v])
+					)
+					.ToList();
+				
+				MovePieceToSpace(enemy, spawnSpaces[Random.Range(0, spawnSpaces.Count)], false);
+			}
+
 			Turn = Turn.Player;
 		}
 	}
@@ -108,15 +139,17 @@ public class Board : MonoBehaviour
 			pos.y >= 0 && pos.y < Dimensions.y;
 	}
 
-	public void MovePieceToSpace (BoardPiece piece, BoardSpace space)
+	public void MovePieceToSpace (BoardPiece piece, BoardSpace space, bool breakPrevious = true)
 	{
 		BoardSpace currentSpace = GetSpaceContaining(piece);
 
-		currentSpace.IsBroken = true;
+		if (currentSpace != null)
+		{
+			if (breakPrevious) currentSpace.IsBroken = true;
+			currentSpace.OccupyingPiece = null;
+		}
 
-		currentSpace.OccupyingPiece = null;
 		space.OccupyingPiece = piece;
-
 		piece.transform.position = space.transform.position;
 	}
 
