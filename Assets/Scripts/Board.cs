@@ -112,7 +112,7 @@ public class Board : MonoBehaviour
 		calculatingAI = false;
 		Turn = Turn.Player;
 
-		ScoreIndicator.text = "Score: " + (++score);
+		if (ScoreIndicator != null) ScoreIndicator.text = "Score: " + (++score);
 	}
 	
 	#region Public Helper Methods
