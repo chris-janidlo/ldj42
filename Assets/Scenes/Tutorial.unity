@@ -172,7 +172,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.49411765}
+    m_DisabledColor: {r: 0.09803922, g: 0.0627451, b: 0.15686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -324,7 +324,8 @@ MonoBehaviour:
   SpacePrefab: {fileID: 114520523589906622, guid: f368ea03236054c73b13e3e9bb02e2c2,
     type: 2}
   Player: {fileID: 750606196}
-  Enemies: []
+  Enemies:
+  - {fileID: 1494585252}
   EnemyPrefab: {fileID: 114571122238071146, guid: d2bad4b0b6cf84df8bb3c10206595795,
     type: 2}
   EnemySpawnRate:
@@ -1032,6 +1033,90 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 548640996}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &593383955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 593383956}
+  - component: {fileID: 593383958}
+  - component: {fileID: 593383957}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &593383956
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593383955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1225544667}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -20, y: -20}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &593383957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593383955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'The white piece in the center is your token. You control it by using the
+    actions on the top right: Dash, Slash, Repair, Teleport, and Walk. In order to
+    use an action, click on the word and then click on the board space you want to
+    use it on. If an action is greyed out, you can''t use it this turn.
+
+
+    The manual below tells you what each action does. Go ahead and try one now.
+
+
+    (click to continue)'
+--- !u!222 &593383958
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 593383955}
+  m_CullTransparentMesh: 0
 --- !u!1 &611289789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1259,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.49411765}
+    m_DisabledColor: {r: 0.09803922, g: 0.0627451, b: 0.15686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -1415,6 +1500,65 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 917007459}
   m_CullTransparentMesh: 0
+--- !u!1 &1063140053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1063140055}
+  - component: {fileID: 1063140054}
+  m_Layer: 0
+  m_Name: TutorialManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1063140054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1063140053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fec2dfdbb57643f5a7794100911e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Image: {fileID: 1225544668}
+  Text: {fileID: 593383957}
+  Messages:
+  - 'The moves you can use have now changed. You can always use Slash or Walk, but
+    you can only use Dash, Repair and Teleport as part of a combo. You can see all
+    the combos on the bottom right.
+
+
+    The red piece in the bottom left is an enemy. Let it get too close and it deals
+    damage to you, breaking one of your orbs. If that happens three times, game over!'
+  - See how some of the spaces are now a different color? Those are broken, and you
+    can't put your piece on them unless you fix them with Repair or Dash. Enemy pieces,
+    however, can walk on broken pieces (although they never spawn on them) so manage
+    your space carefully!
+  - 'In the main game, the goal is to live as long as possible. But this covers it
+    for the tutorial.
+
+
+    Click to return back to the main menu'
+--- !u!4 &1063140055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1063140053}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1109742984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1646,7 @@ RectTransform:
   m_Children:
   - {fileID: 28032296}
   - {fileID: 547185172}
+  - {fileID: 1225544667}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1539,6 +1684,76 @@ Transform:
   m_Father: {fileID: 139543073}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1225544666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225544667}
+  - component: {fileID: 1225544669}
+  - component: {fileID: 1225544668}
+  m_Layer: 5
+  m_Name: TutorialCover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1225544667
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1225544666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 593383956}
+  m_Father: {fileID: 1109742988}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -100, y: -100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1225544668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1225544666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8509804}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1225544669
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1225544666}
+  m_CullTransparentMesh: 0
 --- !u!1 &1292153199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,7 +1890,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.49411765}
+    m_DisabledColor: {r: 0.09803922, g: 0.0627451, b: 0.15686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -1809,6 +2024,12 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
   m_ChildControlHeight: 1
+--- !u!114 &1494585252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114571122238071146, guid: d2bad4b0b6cf84df8bb3c10206595795,
+    type: 2}
+  m_PrefabInternal: {fileID: 1856710797}
+  m_Script: {fileID: 11500000, guid: 07cf62e4aca5b4903badb855be37c8fc, type: 3}
 --- !u!1 &1570014900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,7 +2124,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.49411765}
+    m_DisabledColor: {r: 0.09803922, g: 0.0627451, b: 0.15686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:
@@ -2081,7 +2302,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
     m_PressedColor: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.49411765}
+    m_DisabledColor: {r: 0.09803922, g: 0.0627451, b: 0.15686275, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0
   m_SpriteState:

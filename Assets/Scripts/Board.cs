@@ -23,6 +23,8 @@ public class Board : MonoBehaviour
 
 	public Turn Turn;
 
+	bool calculatingAI;
+
 	void Awake ()
 	{
 		if (Instance != null)
@@ -55,47 +57,56 @@ public class Board : MonoBehaviour
 	{
 		if (Player == null) throw new System.Exception("Player cannot be null");
 
-		if (Turn == Turn.AI)
+		if (Turn == Turn.AI && !calculatingAI)
 		{
-			foreach (var enemy in Enemies)
-			{
-				BoardSpace closestSpace = GetPlusShapePositionsAroundPiece(enemy)
-					.OrderBy(v => v, new Vector2IntComparerClosestToGiven((Vector2Int) GetPositionOf(Player)))
-					.Select(v => Spaces[v])
-					.Where(s => s.OccupyingPiece == null || s.OccupyingPiece == Player)
-					.First();
+			StartCoroutine(enemyTurnRoutine());
+		}
+	}
 
-				if (closestSpace.OccupyingPiece == Player)
-				{
-					Player.Health -= enemy.Damage;
-				}
-				else
-				{
-					MovePieceToSpace(enemy, closestSpace);
-				}
+	IEnumerator enemyTurnRoutine ()
+	{
+		calculatingAI = true;
+		yield return new WaitForSeconds(.2f);
+
+		foreach (var enemy in Enemies)
+		{
+			BoardSpace closestSpace = GetPlusShapePositionsAroundPiece(enemy)
+				.OrderBy(v => v, new Vector2IntComparerClosestToGiven((Vector2Int)GetPositionOf(Player)))
+				.Select(v => Spaces[v])
+				.Where(s => s.OccupyingPiece == null || s.OccupyingPiece == Player)
+				.First();
+
+			if (closestSpace.OccupyingPiece == Player)
+			{
+				Player.Health -= enemy.Damage;
 			}
-
-			float chance = EnemySpawnRate.Evaluate(Enemies.Count);
-			if (Random.value < chance)
+			else
 			{
-				var playerPos = (Vector2Int) GetPositionOf(Player);
-				var spawnSpaces = Spaces.Keys
-					.Where(v => SpaceIsWalkable(Spaces[v]))
-					.Except(new Vector2Int[] {
+				MovePieceToSpace(enemy, closestSpace);
+			}
+		}
+
+		float chance = EnemySpawnRate.Evaluate(Enemies.Count);
+		if (Random.value < chance)
+		{
+			var playerPos = (Vector2Int)GetPositionOf(Player);
+			var spawnSpaces = Spaces.Keys
+				.Where(v => SpaceIsWalkable(Spaces[v]))
+				.Except(new Vector2Int[] {
 						playerPos + Vector2Int.up,
 						playerPos + Vector2Int.right,
 						playerPos + Vector2Int.down,
 						playerPos + Vector2Int.left,
-					}
-						.Where(PositionInRange)
-					)
-					.ToList();
+				}
+					.Where(PositionInRange)
+				)
+				.ToList();
 
-				SpawnEnemy(spawnSpaces[Random.Range(0, spawnSpaces.Count)]);
-			}
-
-			Turn = Turn.Player;
+			SpawnEnemy(spawnSpaces[Random.Range(0, spawnSpaces.Count)]);
 		}
+
+		calculatingAI = false;
+		Turn = Turn.Player;
 	}
 	
 	#region Public Helper Methods
@@ -151,7 +162,7 @@ public class Board : MonoBehaviour
 	{
 		var space = Spaces[piece.StartingPosition];
 		space.OccupyingPiece = piece;
-		
+
 		piece.DesiredPosition = space.transform.position;
 		piece.transform.position = space.transform.position;
 	}

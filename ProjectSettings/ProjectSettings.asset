@@ -620,7 +620,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.1
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: ff3a2dd3-d1bb-4c67-bb45-e221188bc187
   projectName: wgj54
   organizationId: chris-janidlo
